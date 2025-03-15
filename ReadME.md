@@ -12,7 +12,10 @@ This plugin integrates MuJoCo physics engine with Unreal Engine, allowing you to
 
 ## Demo
 
-![Simulation Demo](https://cdn.loom.com/sessions/thumbnails/b13b7f08be014d378c3e1b542639aadc-afd6248e9e32b17f-full-play.gif)
+![Simulation Demo](https://cdn.loom.com/sessions/thumbnails/ec26c892b5014a03afb7d016b2d4b4d5-88ba2fce00140e4d-full-play.gif)
+
+![Simulation Demo 2](https://cdn.loom.com/sessions/thumbnails/c750fc543f3548208ad88d14b0447251-beb5032d0c1cdf27-full-play.gif)
+
 ## Installation
 
 1. Clone this repository to your Unreal Engine project's `Plugins` folder
