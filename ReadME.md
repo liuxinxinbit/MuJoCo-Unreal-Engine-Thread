@@ -10,6 +10,9 @@ This plugin integrates MuJoCo physics engine with Unreal Engine, allowing you to
 - Import object colors from MuJoCo models
 - Multiple simultaneous simulation instances support
 
+## Demo
+
+![Simulation Demo](https://cdn.loom.com/sessions/thumbnails/b13b7f08be014d378c3e1b542639aadc-afd6248e9e32b17f-full-play.gif)
 ## Installation
 
 1. Clone this repository to your Unreal Engine project's `Plugins` folder
