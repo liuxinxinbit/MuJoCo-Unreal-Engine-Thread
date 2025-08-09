@@ -2,6 +2,11 @@
 
 This plugin integrates MuJoCo physics engine with Unreal Engine, allowing you to load MuJoCo XML files directly into Unreal Engine and run advanced physics simulations.
 
+## Update Features
+
+- Added support for 500 hz mujoco simulation
+- Optimized DLL dependencies for easier integration and reduced setup complexity
+
 ## Features
 
 - Load MuJoCo XML files into Unreal Engine

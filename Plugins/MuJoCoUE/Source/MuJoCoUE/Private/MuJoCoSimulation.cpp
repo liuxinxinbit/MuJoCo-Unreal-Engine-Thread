@@ -253,10 +253,28 @@ void AMuJoCoSimulation::BeginPlay()
 		ConvertMuJoCoModelToProceduralMeshes(mModel, this);
 		GenerateMeshes(_info);
 	}
+	// Initialize worker thread
+	bStopThread = false;
+    WorkerRunnable = new FMujocoWorkerThread(*mData, *mModel, bStopThread, ThreadRunCount); 
+    WorkerThread = FRunnableThread::Create(WorkerRunnable, TEXT("MujocoWorkerThread"));
 }
 
 void AMuJoCoSimulation::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
+    // 停止并销毁线程
+	bStopThread = true;
+    if (WorkerThread)
+    {
+        WorkerThread->Kill(true);
+        delete WorkerThread;
+        WorkerThread = nullptr;
+    }
+    
+    if (WorkerRunnable)
+    {
+        delete WorkerRunnable;
+        WorkerRunnable = nullptr;
+    }
 
 	if (mData)
 		mj_deleteData(mData);
@@ -322,9 +340,9 @@ void AMuJoCoSimulation::SimulateMuJoCo(float DeltaTime)
 		UE_LOG(LogTemp, Error, TEXT("Model or data is null"));
 		return;
 	}
-	double startTime = mData->time;
-	while (mData->time - startTime < DeltaTime)
-		mj_step(mModel, mData);
+	// double startTime = mData->time;
+	// while (mData->time - startTime < DeltaTime)
+	// 	mj_step(mModel, mData);
 
 	ModelInfo info;
 	if (!_info.bodies.size())
@@ -361,8 +379,8 @@ bool AMuJoCoSimulation::LoadModel(FString Xml)
 void AMuJoCoSimulation::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	if (bSimulationRunning)
-		SimulateMuJoCo(DeltaTime);
+	// if (bSimulationRunning)
+	SimulateMuJoCo(DeltaTime);
 }
 
 void AMuJoCoSimulation::SetControl(int Id, float Value)

@@ -4,8 +4,20 @@
 
 #include "mujoco/mujoco.h"
 
-#include "CoreMinimal.h"
 
+#include "CoreMinimal.h"
+#include "HAL/Runnable.h"
+#include "HAL/RunnableThread.h"
+#include "HAL/ThreadSafeBool.h"
+#include "HAL/ThreadSafeCounter.h"
+#include "HAL/PlatformProcess.h"
+#include "UObject/ObjectMacros.h"
+#include "UObject/Object.h"
+#include "UObject/ConstructorHelpers.h"
+#include "Engine/StaticMesh.h"
+#include "Components/StaticMeshComponent.h"
+
+#include "MujocoWorkerThread.h"
 #include "GameFramework/Actor.h"
 #include "ProceduralMeshComponent.h"
 // #include "Components/InstancedStaticMeshComponent.h"
@@ -174,7 +186,13 @@ protected:
 	mjModel *mModel;
 	ModelInfo _info;
 	ModelInfo _infoStart;
-	bool bSimulationRunning = false;
+	bool bSimulationRunning = true;
+
+	// 工作线程相关变量
+	FThreadSafeBool bStopThread;
+    FRunnableThread* WorkerThread;
+    FMujocoWorkerThread* WorkerRunnable;
+    FThreadSafeCounter ThreadRunCount;
 
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MuJoCo")

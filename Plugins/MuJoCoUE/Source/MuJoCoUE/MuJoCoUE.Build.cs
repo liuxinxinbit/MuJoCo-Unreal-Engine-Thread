@@ -62,10 +62,9 @@ public class MuJoCoUE : ModuleRules
 		//if (Target.Platform == UnrealTargetPlatform.Win64 || Target.Platform == UnrealTargetPlatform.Win32)
 		//{
 		//	string SDLPlatformPrefix = Target.Platform == UnrealTargetPlatform.Win64 ? "x64" : "x86";
-		string UE4PlatformPrefix = Target.Platform == UnrealTargetPlatform.Win64 ? "Win64" : "Win32";
 
 		string MujocoBinDirectory = Path.Combine(MUJOCO_ROOT, "lib");
-		string UE4BinDirectory = Path.Combine(PluginDirectory, "Binaries", UE4PlatformPrefix);
+		string UE4BinDirectory = Path.Combine(PluginDirectory, "Source/mujoco/bin");
 
 		PublicAdditionalLibraries.Add(Path.Combine(MujocoBinDirectory, "mujoco.lib"));
 		string DLLTargetPath = Path.Combine(UE4BinDirectory, "mujoco.dll");
